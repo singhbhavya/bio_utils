@@ -24,7 +24,8 @@ conda create -y -n cell2loc_env python=3.9
 conda activate cell2loc_env 
 pip install scvi-tools
 pip install git+https://github.com/BayraktarLab/cell2location.git#egg=cell2location[tutorials]
-pip3 install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 -f https://download.pytorch.org/whl/torch_stable.html
+pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
+pip install --upgrade "jax[cuda12]"
 ```
 
 ### Add Jupyter Kernel
@@ -43,5 +44,11 @@ Remove any packages from this list that you will not be using.
 conda install -c conda-forge scanpy python-igraph leidenalg
 conda install scipy
 pip install squidpy
+pip install gtfparse
 ```
 
+### For Mount Sinai Users: Requesting Jupyter with GPU to use cell2location:
+
+```
+minerva-jupyter-module-web.sh --mem 50000 --timelimit 12:00 --ncpus 4 -mm anaconda3/2021.5,cuda/12.1.1 -env /insert/path/to/cell2loc_env -q gpuexpress -R a100 --ngpus 2
+```
